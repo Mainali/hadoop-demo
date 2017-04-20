@@ -17,11 +17,11 @@ public class PairsReduce extends Reducer<StringPair, IntWritable, StringPair, Do
 
 	public void reduce(StringPair key,Iterable<IntWritable> vals,Reducer<StringPair,IntWritable,StringPair,DoubleWritable>.Context context) throws IOException, InterruptedException{
 		int s=0;
-		for(IntWritable iw :vals){
-			s +=iw.get();
+		for(IntWritable v :vals){
+			s +=v.get();
 		}
 		
-		if(key.getNeighbour().equals("*")){
+		if(key.getNeighbour().toString().equals("*")){
 			total = s;
 		}else{
 			double result = s/total;

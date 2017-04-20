@@ -10,7 +10,7 @@ public class PairsMap extends Mapper<LongWritable, Text, StringPair, IntWritable
 	private final static IntWritable one = new IntWritable(1);
 	private final StringPair pair = new StringPair();
 	public void map(LongWritable key,Text val, Mapper<LongWritable, Text, StringPair, IntWritable>.Context context) throws IOException, InterruptedException{
-		String line = val.toString();
+		String line = val.toString().trim();
 		String[] items = line.split("\\s+");
 		
 		for(int i=0;i<items.length;i++){
