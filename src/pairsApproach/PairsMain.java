@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -27,10 +28,12 @@ public class PairsMain extends Configured implements Tool {
 		
 		@SuppressWarnings("deprecation")
 		Job job = new Job(conf,"paircount");
-		job.setJarByClass(PairsMain.class);
+		job.setJarByClass(this.getClass());
 		
 		job.setOutputKeyClass(StringPair.class);
-	    job.setOutputValueClass(IntWritable.class);
+	    job.setOutputValueClass(DoubleWritable.class);
+	    job.setMapOutputValueClass(IntWritable.class);
+	    job.setMapOutputKeyClass(StringPair.class);
 	        
 	    job.setMapperClass(PairsMap.class);
 	    job.setReducerClass(PairsReduce.class);

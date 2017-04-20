@@ -16,11 +16,17 @@ public class PairsMap extends Mapper<LongWritable, Text, StringPair, IntWritable
 		for(int i=0;i<items.length;i++){
 		
 			int j = i+1;
-			while(!(items[j].equals(items[i])) && j<items.length){
-				pair.setPairs(items[i], items[j]);
-				context.write(pair, one);
-				pair.setPairs(items[i], "*");
-				context.write(pair,one);
+			while(j<items.length){
+				if(items[i].equals(items[j]))
+					break;
+				else{
+					pair.setPairs(items[i], items[j]);
+					context.write(pair, one);
+					pair.setPairs(items[i], "*");
+					context.write(pair,one);
+				}
+				
+				j++;
 			}
 		}
 	}

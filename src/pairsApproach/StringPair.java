@@ -52,14 +52,14 @@ public class StringPair implements WritableComparable<StringPair> {
 		if(o==null)
 			return 0;
 		
-		int res = key.compareTo(o.key);
-		return (res==0) ? neighbour.compareTo(o.neighbour): res;
+		int res = key.toString().compareTo(o.key.toString());
+		return (res==0) ? neighbour.toString().compareTo(o.neighbour.toString()): res;
 	}
 	
 	
 	@Override 
 	public String toString(){
-		return key+","+neighbour;
+		return key.toString()+","+neighbour.toString();
 	}
 	
 
