@@ -1,6 +1,7 @@
 package pairsApproach;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
@@ -25,7 +26,8 @@ public class PairsReduce extends Reducer<StringPair, IntWritable, StringPair, Do
 			total = s;
 		}else{
 			double result = s/total;
-			context.write(key, new DoubleWritable(Double.valueOf(result)));
+			DecimalFormat df = new DecimalFormat("#.###");
+			context.write(key, new DoubleWritable(Double.valueOf(df.format(result))));
 		}
 	}
 }

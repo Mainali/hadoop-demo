@@ -6,6 +6,7 @@ import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.Mapper;
 
 
+
 public class PairsMap extends Mapper<LongWritable, Text, StringPair, IntWritable> {
 	private final static IntWritable one = new IntWritable(1);
 	private final StringPair pair = new StringPair();
@@ -14,18 +15,12 @@ public class PairsMap extends Mapper<LongWritable, Text, StringPair, IntWritable
 		String[] items = line.split("\\s+");
 		
 		for(int i=0;i<items.length;i++){
-		
 			int j = i+1;
-			while(j<items.length){
-				if(items[i].equals(items[j]))
-					break;
-				else{
-					pair.setPairs(items[i], items[j]);
-					context.write(pair, one);
-					pair.setPairs(items[i], "*");
-					context.write(pair,one);
-				}
-				
+			while(j<items.length && !items[j].equals(items[i])){
+				pair.setPairs(items[i],items[j]);
+				context.write(pair,one );
+				pair.setPairs(items[i],"*");
+				context.write(pair, one);
 				j++;
 			}
 		}

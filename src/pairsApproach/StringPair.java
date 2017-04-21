@@ -16,9 +16,14 @@ public class StringPair implements WritableComparable<StringPair> {
 		this.neighbour = new Text();
 	}
 	
+	public StringPair(String k, String n){
+		this.key = new Text(k);
+		this.neighbour = new Text(n);
+	}
+	
 	public void setPairs(String k, String n){
-		key.set(k);
-		neighbour.set(n);
+		this.key.set(k);
+		this.neighbour.set(n);
 	}
 	
 	public Text getKey(){
@@ -59,7 +64,7 @@ public class StringPair implements WritableComparable<StringPair> {
 	
 	@Override 
 	public String toString(){
-		return key.toString()+","+neighbour.toString();
+		return "("+key.toString()+","+neighbour.toString()+")";
 	}
 	
 
